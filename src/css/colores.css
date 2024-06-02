@@ -1,0 +1,74 @@
+@media (max-width: 576px) {
+    .btn {
+        width: 100%;
+    }
+
+    .form-select {
+        width: 100%;
+    }
+
+    .svg-icon {
+        margin-bottom: 1rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 1rem !important;
+    }
+}
+
+hr{
+    color: #5f27cd;
+}
+
+.colorNav{
+    background-color: #8BCDCD;
+}
+
+.margenSuperior{
+    background-color: #3797A4;
+    padding: 10px;
+}
+
+body{
+    background-image: linear-gradient(to bottom, #8bcdcd, #8dd5c5, #99dcb8, #b0e1a7, #cee397);
+}
+
+.cardFooterColor{
+    background-color: #5f27cd;
+    color: white;
+}
+
+
+.colorLoguitos{
+    fill:#1dd1a1
+}
+
+.colorLoguitoCalendario{
+    fill:#1dd1a1;
+    fill-rule:evenodd;
+}
+
+.colorSalidas{
+    color: #5f27cd
+}
+
+
+.correos{
+    color: red;
+}
+
+.subTexto{
+    color: gray;
+}
+
+.colorFondoAgencia{
+    background-color: #5e27cd71;color: white;
+}
+
+.textoLocalizarOficina{
+    color: rgb(116, 116, 116)
+}
+
+.textoSomos{
+    color: rgb(77, 77, 77)
+}
