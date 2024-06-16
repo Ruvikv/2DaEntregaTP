@@ -38,7 +38,7 @@ const Home = () => {
             <section className="container text-center">
                 <div className="container text-center bg-white col-lg-7 col-md-10 p-sm-2 rounded-4">
                     <div className="row justify-content-start">
-                        <div className="col-12 col-md-4 col-lg-4 mb-3 pt-2">
+                        <div className="col-12 col-md-4 col-lg-4 mb-3">
                             <div className="d-flex align-items-center list-unstyled">
                                 <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" width="21" height="21" viewBox="0 0 29.91 29.91">
                                     <path d="M23.73,14.21v0a1.82,1.82,0,0,0-.05.23h0a8.91,8.91,0,0,1-.6,1.76,0,0,0,0,0,0,0c-1,2.4-3.23,6-8,10-4.82-4-7-7.62-8-10,0,0,0,0,0,0a8.91,8.91,0,0,1-.6-1.76h0a1.65,1.65,0,0,1,0-.23s0,0,0,0a9.47,9.47,0,0,1-.16-1.68,8.87,8.87,0,1,1,17.73,0,8.64,8.64,0,0,1-.16,1.69M15,2.2A10.34,10.34,0,0,0,4.7,12.52a9.74,9.74,0,0,0,.19,1.94,2.12,2.12,0,0,0,.07.35,9.92,9.92,0,0,0,.69,2c1.11,2.62,3.56,6.64,8.92,11A.74.74,0,0,0,15,28a.72.72,0,0,0,.46-.16c5.36-4.31,7.81-8.33,8.93-10.95a10.34,10.34,0,0,0,.69-2l.07-.35a10.53,10.53,0,0,0,.18-1.94A10.35,10.35,0,0,0,15,2.2Z" className="colorLoguitos"></path>
