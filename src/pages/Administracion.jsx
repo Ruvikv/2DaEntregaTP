@@ -74,31 +74,35 @@ const Administracion = () => {
         }
     };
 
-    return (
-        <div className='p-4 container'>
+    return ( 
+
+        <div>
             <div className='p-4 d-flex justify-content-center gap-5'>
                 <button className="shadow__btn">Alojamiento</button>                           
                 <Link to='/TipoAlojamiento'><button className="shadow__btn2">Tipo Alojamiento y Servicios</button></Link>
             </div>
-            {/* Mostrar alojamientos, borrar y editar */}
-            <table className="table col">
-                <thead>
-                    <tr>
-                        <th scope="col" className='table-primary'>Tipo Alojamiento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Array.isArray(tipos) ? tipos.map(tipo => (
-                        <tr key={tipo.idTipoAlojamiento}>
-                            <td>{tipo.Descripcion}</td>
-                            <div className='mb-2 bg-transparent d-flex align-items-center'>
-                                <button onClick={() => Borrar(tipo.idTipoAlojamiento)} className="btn btn-danger">Eliminar</button>
-                                <button onClick={() => Editar(tipo.idTipoAlojamiento)} className="btn btn-warning">Editar</button>
-                            </div>
-                        </tr>
-                    )) : <tr><td colSpan="3"></td></tr>}
-                </tbody>
-            </table>
+            <div className='d-flex justify-content-center'>
+                <div className=''>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" className='table-primary'>Tipo Alojamiento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Array.isArray(tipos) ? tipos.map(tipo => (
+                                <tr key={tipo.idTipoAlojamiento}>
+                                    <td>{tipo.Descripcion}</td>
+                                    <div className='mb-2 bg-transparent d-flex align-items-center'>
+                                        <button onClick={() => Borrar(tipo.idTipoAlojamiento)} className="btn btn-danger">Eliminar</button>
+                                        <button onClick={() => Editar(tipo.idTipoAlojamiento)} className="btn btn-warning">Editar</button>
+                                    </div>
+                                </tr>
+                            )) : <tr><td colSpan="3"></td></tr>}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 };
