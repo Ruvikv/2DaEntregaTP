@@ -14,6 +14,7 @@ import Alojamiento from './form/Alojamiento';
 import TipoAlojamiento from './form/TipoAlojamiento';
 
 
+
 function App() {
   return (
 
@@ -27,6 +28,8 @@ function App() {
       <Route exact path="/Administracion" element={<Administracion/>} />
       <Route exact path="/Alojamiento" element={<Alojamiento/>}/>
       <Route exact path="/TipoAlojamiento" element={<TipoAlojamiento/>} />
+    
+
     </Routes>
     <Footer/>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
 
+
 const Administracion = () => {
 
     const [descripcion, setDescripcion] = useState('');
@@ -78,7 +79,8 @@ const Administracion = () => {
 
         <div>
             <div className='p-4 d-flex justify-content-center gap-5'>
-                <button className="shadow__btn">Alojamiento</button>                           
+               
+                <Link to='/Alojamiento'><button className="shadow__btn">Alojamiento</button></Link>                     
                 <Link to='/TipoAlojamiento'><button className="shadow__btn2">Tipo Alojamiento y Servicios</button></Link>
             </div>
             <div className='d-flex justify-content-center'>

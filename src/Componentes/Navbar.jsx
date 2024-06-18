@@ -32,6 +32,7 @@ return (
                     <li className="nav-item">
                         <Link className="nav-link fs-5 active" to='/Administracion'>Administracion</Link>
                     </li>
+                    
                 </ul>
                 <form className="d-flex px-4" role="search">
                 <input className="form-control me-2 " type="search" placeholder="Search" aria-label="Search"/>

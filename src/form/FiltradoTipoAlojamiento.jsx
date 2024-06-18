@@ -10,7 +10,7 @@ const FiltradoTipoAlojamiento = () => {
     }, []);
     
     const getAlojamientos = () => {
-        fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento')
+        fetch('http://localhost:3001/tiposAlojamiento/getTipoAlojamiento')
             .then(res => res.json())
             .then(res => {
                 if (Array.isArray(res)) {
