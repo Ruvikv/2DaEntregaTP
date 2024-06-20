@@ -53,6 +53,13 @@ const AddHotelform = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validación de longitud de latitud y longitud
+    if (latitud.length > 10 || longitud.length > 10) {
+      alert('Latitud y Longitud deben tener un máximo de 10 caracteres.');
+      return;
+    }
+
     const data = {
       Titulo: titulo,
       Descripcion: descripcion,
@@ -180,135 +187,139 @@ const AddHotelform = () => {
             </div>
             <div className="mb-3">
               <label htmlFor="tipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
-              <select
-                className="form-select"
-                id="tipoAlojamiento"
-                value={tipoAlojamiento}
-                onChange={(e) => setTipoAlojamiento(e.target.value)}
-              >
-                <option value="">Seleccione tipo de alojamiento</option>
-                {tiposAlojamiento.map((tipo) =>
-                  <option key={tipo.idTipoAlojamiento} value={tipo.idTipoAlojamiento}>
-                    {tipo.Descripcion}
-                  </option>
-                )}
-              </select>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="precioDia" className="form-label">Precio por día:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="precioDia"
-                value={precioPorDia}
-                onChange={(e) => setPrecioPorDia(e.target.value)}
-              />
-            </div>
-            <div className="row">
-              <div className="col-md-6 mb-3">
-                <label htmlFor="latitud" className="form-label">Latitud:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="latitud"
-                  value={latitud}
-                  onChange={(e) => setLatitud(e.target.value)}
-                />
-              </div>
-              <div className="col-md-6 mb-3">
-                <label htmlFor="longitud" className="form-label">Longitud:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="longitud"
-                  value={longitud}
-                  onChange={(e) => setLongitud(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6 mb-3">
-                <label htmlFor="cantidadDormitorios" className="form-label">Cantidad de Dormitorios:</label>
-                <select
-                  className="form-select"
-                  id="cantidadDormitorios"
-                  value={cantidadDormitorios}
-                  onChange={(e) => setCantidadDormitorios(e.target.value)}
-                >
-                  <option value="">Seleccione cantidad de dormitorios</option>
-                  {[...Array(5).keys()].map(i => (
-                    <option key={i} value={i + 1}>{i + 1}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="col-md-6 mb-3">
-                <label htmlFor="cantidadBanios" className="form-label">Cantidad de Baños:</label>
-                <select
-                  className="form-select"
-                  id="cantidadBanios"
-                  value={cantidadBanios}
-                  onChange={(e) => setCantidadBanios(e.target.value)}
-                >
-                  <option value="">Seleccione cantidad de baños</option>
-                  {[...Array(5).keys()].map(i => (
-                    <option key={i} value={i + 1}>{i + 1}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="estado" className="form-label">Estado:</label>
-              <select
-                className="form-select"
-                id="estado"
-                value={estado}
-                onChange={(e) => setEstado(e.target.value)}
-              >
-                <option value="Disponible">Disponible</option>
-                <option value="Reservado">Reservado</option>
-              </select>
-            </div>
-            <button type="submit" className="btn btn-primary">{editingAlojamiento ? "Actualizar" : "Agregar"}</button>
-            {editingAlojamiento && (
-              <button type="button" className="btn btn-secondary ms-2" onClick={resetForm}>Cancelar</button>
-            )}
-          </form>
-        </div>
-      </div>
-
-      {/* Mostrar alojamientos filtrados */}
-      <div className="mt-5">
-        <h2>Alojamientos Disponibles</h2>
-        {alojamientosFiltrados.length > 0 ? (
-          <div className="row row-cols-1 row-cols-md-2 g-4">
-            {alojamientosFiltrados.map((alojamiento, index) => (
-              <div key={index} className="col">
-                <div className="card">
-                  <div className="card-body">
-
-                    <h5 className="card-title">{alojamiento.Titulo}</h5>
-                    <p  className="card-text"><strong>ID::</strong> {alojamiento.idAlojamiento }</p>
-                    <p className="card-text"> <strong>Descripcion:</strong>{alojamiento.Descripcion}</p>
-                    <p className="card-text"><strong>Tipo de Alojamiento:</strong> {alojamiento.TipoAlojamiento}</p>
-                    <p className="card-text"><strong>Precio por día:</strong> {alojamiento.PrecioPorDia}</p>
-                    <p className="card-text"><strong>Latitud:</strong> {alojamiento.Latitud}</p>
-                    <p className="card-text"><strong>Longitud:</strong> {alojamiento.Longitud}</p>
-                    <p className="card-text"><strong>Cantidad de Dormitorios:</strong> {alojamiento.CantidadDormitorios}</p>
-                    <p className="card-text"><strong>Cantidad de Baños:</strong> {alojamiento.CantidadBanios}</p>
-                    <p className="card-text"><strong>Estado:</strong> {alojamiento.Estado}</p>
-                    <button className="btn btn-warning me-2" onClick={() => handleEdit(alojamiento)}>Editar</button>
-                    <button className="btn btn-danger" onClick={() => handleDelete(alojamiento.idAlojamiento)}>Eliminar</button>
+                            <select
+                              className="form-select"
+                              id="tipoAlojamiento"
+                              value={tipoAlojamiento}
+                              onChange={(e) => setTipoAlojamiento(e.target.value)}
+                            >
+                              <option value="">Seleccione tipo de alojamiento</option>
+                              {tiposAlojamiento.map((tipo) =>
+                                <option key={tipo.idTipoAlojamiento} value={tipo.idTipoAlojamiento}>
+                                  {tipo.Descripcion}
+                                </option>
+                              )}
+                            </select>
+                          </div>
+                          <div className="mb-3">
+                            <label htmlFor="precioDia" className="form-label">Precio por día:</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="precioDia"
+                              value={precioPorDia}
+                              onChange={(e) => setPrecioPorDia(e.target.value)}
+                            />
+                          </div>
+                          <div className="row">
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="latitud" className="form-label">Latitud:</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="latitud"
+                                value={latitud}
+                                onChange={(e) => setLatitud(e.target.value)}
+                                maxLength={10}
+                              />
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="longitud" className="form-label">Longitud:</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="longitud"
+                                value={longitud}
+                                onChange={(e) => setLongitud(e.target.value)}
+                                maxLength={10}
+                              />
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="cantidadDormitorios" className="form-label">Cantidad de Dormitorios:</label>
+                              <select
+                                className="form-select"
+                                id="cantidadDormitorios"
+                                value={cantidadDormitorios}
+                                onChange={(e) => setCantidadDormitorios(e.target.value)}
+                              >
+                                <option value="">Seleccione cantidad de dormitorios</option>
+                                {[...Array(5).keys()].map(i => (
+                                  <option key={i} value={i + 1}>{i + 1}</option>
+                                ))}
+                              </select>
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="cantidadBanios" className="form-label">Cantidad de Baños:</label>
+                              <select
+                                className="form-select"
+                                id="cantidadBanios"
+                                value={cantidadBanios}
+                                onChange={(e) => setCantidadBanios(e.target.value)}
+                              >
+                                <option value="">Seleccione cantidad de baños</option>
+                                {[...Array(5).keys()].map(i => (
+                                  <option key={i} value={i + 1}>{i + 1}</option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="mb-3">
+                            <label htmlFor="estado" className="form-label">Estado:</label>
+                            <select
+                              className="form-select"
+                              id="estado"
+                              value={estado}
+                              onChange={(e) => setEstado(e.target.value)}
+                            >
+                              <option value="Disponible">Disponible</option>
+                              <option value="Reservado">Reservado</option>
+                            </select>
+                          </div>
+                          <button type="submit" className="btn btn-primary">{editingAlojamiento ? "Actualizar" : "Agregar"}</button>
+                          {editingAlojamiento && (
+                            <button type="button" className="btn btn-secondary ms-2" onClick={resetForm}>Cancelar</button>
+                          )}
+                        </form>
+                      </div>
+                    </div>
+              
+                    {/* Mostrar alojamientos filtrados */}
+                    <div className="mt-5">
+                      <h2>Alojamientos Disponibles</h2>
+                      {alojamientosFiltrados.length > 0 ? (
+                        <div className="row row-cols-1 row-cols-md-2 g-4">
+                          {alojamientosFiltrados.map((alojamiento, index) => (
+                            <div key={index} className="col">
+                              <div className="card">
+                                <div className="card-body">
+              
+                                  <h5 className="card-title">{alojamiento.Titulo}</h5>
+                                  <p className="card-text"><strong>ID:</strong> {alojamiento.idAlojamiento}</p>
+                                  <p className="card-text"><strong>Descripción:</strong> {alojamiento.Descripcion}</p>
+                                  <p className="card-text"><strong>Tipo de Alojamiento:</strong> {alojamiento.TipoAlojamiento}</p>
+                                  <p className="card-text"><strong>Precio por día:</strong> {alojamiento.PrecioPorDia}</p>
+                                  <p className="card-text"><strong>Latitud:</strong> {alojamiento.Latitud}</p>
+                                  <p className="card-text"><strong>Longitud:</strong> {alojamiento.Longitud}</p>
+                                  <p className="card-text"><strong>Cantidad de Dormitorios:</strong> {alojamiento.CantidadDormitorios}</p>
+                                  <p className="card-text"><strong>Cantidad de Baños:</strong> {alojamiento.CantidadBanios}</p>
+                                  <p className="card-text"><strong>Estado:</strong> {alojamiento.Estado}</p>
+                                  <button className="btn btn-warning me-2" onClick={() => handleEdit(alojamiento)}>Editar</button>
+                                  <button className="btn btn-danger" onClick={() => handleDelete(alojamiento.idAlojamiento)}>Eliminar</button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p>No hay alojamientos disponibles.</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No hay alojamientos disponibles.</p>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default AddHotelform;
+                );
+              };
+              
+              export default AddHotelform;
+              
+               
