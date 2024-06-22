@@ -12,6 +12,7 @@ import AgenciaDeViajes from './pages/AgenciaDeViajes';
 import Administracion from './pages/Administracion';
 import Alojamiento from './form/Alojamiento';
 import TipoAlojamiento from './form/TipoAlojamiento';
+import AltaImagenes from './form/AltaImagenes';
 
 
 
@@ -28,6 +29,7 @@ function App() {
       <Route exact path="/Administracion" element={<Administracion/>} />
       <Route exact path="/Alojamiento" element={<Alojamiento/>}/>
       <Route exact path="/TipoAlojamiento" element={<TipoAlojamiento/>} />
+      <Route exact path="/AltaImagenes" element={<AltaImagenes/>} />
     
 
     </Routes>

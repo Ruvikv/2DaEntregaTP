@@ -103,6 +103,7 @@ const TipoAlojamiento = () => {
           alert('ERROR!! NO SE MODIFICO el Tipo Alojamiento');
       }
   };
+
   return (
     <div>
       <div className='col d-flex justify-content-center text-bg-info container'>

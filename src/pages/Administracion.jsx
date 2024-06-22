@@ -3,107 +3,103 @@ import {Link} from 'react-router-dom'
 
 
 const Administracion = () => {
+  
+  const [alojamientosFiltrados, setAlojamientosFiltrados] = useState([]);
+  const [tiposAlojamiento, setTiposAlojamiento] = useState({});
 
-    const [descripcion, setDescripcion] = useState('');
-    const [tipos, setTipos] = useState([]);
-    
+
+  
+    const filterTipoAlojamiento = async (idAlojamiento) => {
+      try {
+        const response = await fetch(`http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${idAlojamiento}`, {
+          method: 'GET',
+        });
+        if (response.ok) {
+          const data = await response.json();
+          return data.Descripcion;
+        }
+      } catch (error) {
+        console.error('Error fetching tipo alojamiento:', error);
+      }
+      return null;
+    };
+  
     useEffect(() => {
-        getAlojamientos();
-    }, []);
-
-    /// Carga los datos a la tabla
-
-    const getAlojamientos = () => {
-        fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento')
-            .then(res => res.json())
-            .then(res => {
-                if (Array.isArray(res)) {
-                    setTipos(res);
-                } else {
-                    console.error('ERROR: Array esperada pero no obtenida', res);
-                }
-            })
-            .catch(error => console.error('Error recuperacion de datos:', error));
-    };
-
-    // Borra datos a la tabla 
-    const Borrar = async (id) => {
-        try {
-            const respuesta = await fetch(`http://localhost:3001/tiposAlojamiento/deleteTipoAlojamiento/${id}`, {
-                method: 'DELETE',
-            });
-            if (respuesta.ok) {
-                alert('Se eliminó correctamente el Tipo Alojamiento');
-                console.log('BORRADO EXITOSO:', respuesta);
-                getAlojamientos(); // Recargar la lista
-            } else {
-                console.error('ERROR al borrar:', respuesta);
-                alert('ERROR!! No se eliminó el Tipo Alojamiento');
-            }
-        } catch (err) {
-            console.error('Error al eliminar datos:', err);
-            alert('ERROR!! No se eliminó el Tipo Alojamiento');
+      const fetchTiposAlojamiento = async () => {
+        const tipos = {};
+        for (const alojamiento of alojamientosFiltrados) {
+          const descripcion = await filterTipoAlojamiento(alojamiento.TipoAlojamiento);
+          tipos[alojamiento.TipoAlojamiento] = descripcion;
         }
-    };
+        setTiposAlojamiento(tipos);
+      };
+  
+      fetchTiposAlojamiento();
+    }, [alojamientosFiltrados]);
 
-    /// MODIFICAR LISTA
-    const Editar = async (id) => {
-        if (!descripcion.trim()) {
-            alert('Por favor ingresa una descripción');
-            return;}
-        const json = {
-                Descripcion: descripcion
-            };
-        try {
-            const respuesta = await fetch(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${id}`, {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(json),
-            });
-            if (respuesta.ok) {
-                alert('Se Modifico El Elemento');
-                console.log('Coreccion Exitosa:', respuesta);
-                setDescripcion(''); // Limpia los imput
-                getAlojamientos();
-            } else {
-                console.error('ERROR AL MODIFICAR:', respuesta);
-                alert('ERROR!! NO SE MODIFICO el Tipo Alojamiento');
-            }
-        } catch (err) {
-            console.error('ERROR AL MODIFICAR LOS DATOS:', err);
-            alert('ERROR!! NO SE MODIFICO el Tipo Alojamiento');
+
+
+    
+  useEffect(() => {
+    const fetchAlojamientos = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/alojamiento/getAlojamientos");
+        if (response.ok) {
+          const data = await response.json();
+          setAlojamientosFiltrados(data.filter(alojamiento => alojamiento.Estado === 'Disponible'));
+        } else {
+          console.error("Error al obtener alojamientos.");
         }
+      } catch (error) {
+        console.error("Error al conectarse con la API:", error);
+      }
     };
+    fetchAlojamientos();
+  }, []);
+
 
     return ( 
 
         <div>
             <div className='p-4 d-flex justify-content-center gap-5'>
-               
-                <Link to='/Alojamiento'><button className="shadow__btn">Alojamiento</button></Link>                     
+                <Link to='/Alojamiento'><button className="shadow__btn">Alojamiento</button></Link>
+                <Link to='/AltaImagenes'><button className="shadow__btn3">Alta Imagenes</button></Link>                     
                 <Link to='/TipoAlojamiento'><button className="shadow__btn2">Tipo Alojamiento y Servicios</button></Link>
             </div>
-            <div className='d-flex justify-content-center'>
-                <div className=''>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" className='table-primary'>Tipo Alojamiento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Array.isArray(tipos) ? tipos.map(tipo => (
-                                <tr key={tipo.idTipoAlojamiento}>
-                                    <td>{tipo.Descripcion}</td>
-                                    <div className='mb-2 bg-transparent d-flex align-items-center'>
-                                        <button onClick={() => Borrar(tipo.idTipoAlojamiento)} className="btn btn-danger">Eliminar</button>
-                                        <button onClick={() => Editar(tipo.idTipoAlojamiento)} className="btn btn-warning">Editar</button>
-                                    </div>
-                                </tr>
-                            )) : <tr><td colSpan="3"></td></tr>}
-                        </tbody>
-                    </table>
-                </div>
+            <div className='container'>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Alojamiento</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Latitud</th>
+                    <th scope="col">Longitud</th>
+                    <th scope="col">Precio Por Dia</th>
+                    <th scope="col">Cantidad de Dormitorios</th>
+                    <th scope="col">Cantidad de Baños</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Tipo de Alojamiento</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {alojamientosFiltrados.length > 0 ? (
+                    alojamientosFiltrados.map((alojamiento, index) => (
+                  <tr key={index}>
+                    <th>{alojamiento.Titulo}</th>
+                    <td>{alojamiento.Descripcion}</td>
+                    <td>{alojamiento.Latitud}</td>
+                    <td>{alojamiento.Longitud}</td>
+                    <td>{alojamiento.PrecioPorDia}</td>
+                    <td>{alojamiento.CantidadDormitorios}</td>
+                    <td>{alojamiento.CantidadBanios}</td>
+                    <td>{alojamiento.Estado}</td>
+                    <td>{tiposAlojamiento[alojamiento.TipoAlojamiento]}</td>
+                  </tr>
+                  ))):(
+                    <p>No hay alojamientos disponibles.</p>
+                    )}                
+                </tbody>
+              </table>
             </div>
         </div>
     );
