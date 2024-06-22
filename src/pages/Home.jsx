@@ -129,7 +129,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="mb-3 justify-content-center align-items-center pb-2">
-                            <button type="button" className="rounded-3 px-4 btn btn-success">Buscar</button>
+                     <Link to='/Buscador'><button className="rounded-3 px-4 btn btn-success">Buscar</button></Link>
                     </div>
                 </div>
             </section>

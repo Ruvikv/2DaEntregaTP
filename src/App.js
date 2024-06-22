@@ -13,7 +13,7 @@ import Administracion from './pages/Administracion';
 import Alojamiento from './form/Alojamiento';
 import TipoAlojamiento from './form/TipoAlojamiento';
 import AltaImagenes from './form/AltaImagenes';
-
+import Buscador from "./form/Buscador"
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
       <Route exact path="/Alojamiento" element={<Alojamiento/>}/>
       <Route exact path="/TipoAlojamiento" element={<TipoAlojamiento/>} />
       <Route exact path="/AltaImagenes" element={<AltaImagenes/>} />
-    
+      <Route exact path="/Buscador" element={<Buscador/>} />
 
     </Routes>
     <Footer/>
