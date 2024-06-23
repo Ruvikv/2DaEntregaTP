@@ -9,6 +9,7 @@ const BuscarAlojamientos = () => {
   const [filtroTipoAlojamiento, setFiltroTipoAlojamiento] = useState("");
   const [filtroEstado, setFiltroEstado] = useState("");
   const [filtroCantidadBanios, setFiltroCantidadBanios] = useState("");
+  const [filtroCantidadDormitorios, setFiltroCantidadDormitorios] = useState("");
   const [filtroPrecio, setFiltroPrecio] = useState("");
 
   useEffect(() => {
@@ -55,11 +56,12 @@ const BuscarAlojamientos = () => {
       filtroTipoAlojamiento,
       filtroEstado,
       filtroCantidadBanios,
+      filtroCantidadDormitorios,
       filtroPrecio,
     });
 
     if (filtroTipoAlojamiento) {
-      filtered = filtered.filter(alojamiento => alojamiento.TipoAlojamiento === filtroTipoAlojamiento);
+      filtered = filtered.filter(alojamiento => alojamiento.TipoAlojamiento === parseInt(filtroTipoAlojamiento));
     }
 
     if (filtroEstado) {
@@ -70,11 +72,15 @@ const BuscarAlojamientos = () => {
       filtered = filtered.filter(alojamiento => alojamiento.CantidadBanios === parseInt(filtroCantidadBanios));
     }
 
+    if (filtroCantidadDormitorios) {
+      filtered = filtered.filter(alojamiento => alojamiento.CantidadDormitorios === parseInt(filtroCantidadDormitorios));
+    }
+
     if (filtroPrecio) {
       filtered = filtered.filter(alojamiento => alojamiento.PrecioPorDia <= parseFloat(filtroPrecio));
     }
 
-    console.log("Alojamientos Filtrados:", filtered); // Verificar resultados filtrados
+    console.log("Alojamientos Filtrados:", filtered);
     setAlojamientosFiltrados(filtered);
   };
 
@@ -95,7 +101,7 @@ const BuscarAlojamientos = () => {
               >
                 <option value="">Todos</option>
                 {tiposAlojamiento.map((tipo) => (
-                  <option key={tipo.idTipoAlojamiento} value={tipo.Descripcion}>
+                  <option key={tipo.idTipoAlojamiento} value={tipo.idTipoAlojamiento}>
                     {tipo.Descripcion}
                   </option>
                 ))}
@@ -121,6 +127,20 @@ const BuscarAlojamientos = () => {
                 id="filtroCantidadBanios"
                 value={filtroCantidadBanios}
                 onChange={(e) => setFiltroCantidadBanios(e.target.value)}
+              >
+                <option value="">Todos</option>
+                {[...Array(5).keys()].map(i => (
+                  <option key={i} value={i + 1}>{i + 1}</option>
+                ))}
+              </select>
+            </div>
+            <div className="col-md-3 mb-3">
+              <label htmlFor="filtroCantidadDormitorios" className="form-label">Cantidad de Dormitorios:</label>
+              <select
+                className="form-select"
+                id="filtroCantidadDormitorios"
+                value={filtroCantidadDormitorios}
+                onChange={(e) => setFiltroCantidadDormitorios(e.target.value)}
               >
                 <option value="">Todos</option>
                 {[...Array(5).keys()].map(i => (
@@ -174,4 +194,3 @@ const BuscarAlojamientos = () => {
 };
 
 export default BuscarAlojamientos;
-
