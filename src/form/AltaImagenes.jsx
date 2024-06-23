@@ -107,15 +107,17 @@ const AltaImagenes = () =>{
               </div>
             </div>
           </div>
-          {/* imagenes */}
-          {imagenAlojamiento.map((imagen) =>(
+        </div>
+        <div className='container d-flex gap-3'>
+            {/* imagenes */}
+            {imagenAlojamiento.map((imagen) =>(
             <div key={imagen} className="card" style={{ width: '18rem' }}>
-            <img src={'http://localhost:3001/imagen/' + imagen.RutaArchivo} className="card-img-top" alt="Imagen del alojamiento" />
-            <div className="card-body">
-              <p className="card-text">{imagen.idAlojamiento}</p>
-            </div>
-          </div>  
-          ))}    
+              <img src={'http://localhost:3001/imagen/' + imagen.RutaArchivo} className="card-img-top" alt="Imagen del alojamiento" />
+              <div className="card-body">
+                <p className="card-text">{imagen.idAlojamiento}</p>
+              </div>
+            </div>  
+            ))}             
         </div>
         <div className='container p-3'>
           <table className="table table-bordered border-primary">

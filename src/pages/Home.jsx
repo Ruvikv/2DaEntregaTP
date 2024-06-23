@@ -1,6 +1,8 @@
 import React from 'react'
+import Buscador from '../form/Buscador';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 const Home = () => {
   return (
@@ -129,7 +131,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="mb-3 justify-content-center align-items-center pb-2">
-                     <Link to='/Buscador'><button className="rounded-3 px-4 btn btn-success">Buscar</button></Link>
+                    <Buscador/>
                     </div>
                 </div>
             </section>

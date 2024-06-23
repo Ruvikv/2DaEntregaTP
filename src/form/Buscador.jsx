@@ -129,7 +129,7 @@ const BuscarAlojamientos = () => {
               </select>
             </div>
             <div className="col-md-3 mb-3">
-              <label htmlFor="filtroPrecio" className="form-label">Precio máximo por día:</label>
+              <label htmlFor="filtroPrecio" className="form-label">Precio máximo:</label>
               <input
                 type="text"
                 className="form-control"

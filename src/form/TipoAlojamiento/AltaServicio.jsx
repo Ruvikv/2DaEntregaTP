@@ -81,7 +81,7 @@ const TipoAlojamiento = () => {
           alert('Por favor ingresa una descripción');
           return;}
       const json = {
-              Nombre: nombre
+        Nombre: nombre
           };
       try {
           const respuesta = await fetch(`http://localhost:3001/servicio/updateServicio/${id}`, {
@@ -116,7 +116,7 @@ const TipoAlojamiento = () => {
             type="text" placeholder="Nombre Del Servicio" 
             aria-label=".form-control-lg example"
             onChange={(evento) => setNombre(evento.target.value)}/>
-            <button className="btn btn-success mt-3 col-5" type='submit'>Enviar</button>
+            <button className="btn btn-success mt-3 col-5" type='submit'>Agregar</button>
           </form>
           <div className='col'>
             <table className="table mt-4">

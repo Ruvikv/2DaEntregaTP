@@ -115,7 +115,7 @@ const TipoAlojamiento = () => {
             type="text" placeholder="Descripcion Tipo Alojamiento" 
             aria-label=".form-control-lg example"
             onChange={(evento) => setDescripcion(evento.target.value)}/>
-            <button className="btn btn-success mt-3 col-5" type='submit'>Enviar</button>
+            <button className="btn btn-success mt-3 col-5" type='submit'>Agregar</button>
           </form>
           <div className='col'>
             <table className="table mt-4">
