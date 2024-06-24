@@ -22,4 +22,4 @@ Licencia
 Este proyecto está bajo una licencia educativa.
 
 Créditos
-Desarrollado por Matías López y Thiago Chamorro como proyecto estudiantil.
+Desarrollado por Matías López y Thiago Chamorro como proyecto.-
