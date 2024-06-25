@@ -121,7 +121,7 @@ const BuscarAlojamientos = () => {
               </select>
             </div>
             <div className="col-md-3 mb-3">
-              <label htmlFor="filtroCantidadBanios" className="form-label">Cantidad de Baños:</label>
+              <label htmlFor="filtroCantidadBanios" className="form-label">Baños:</label>
               <select
                 className="form-select"
                 id="filtroCantidadBanios"
@@ -135,7 +135,7 @@ const BuscarAlojamientos = () => {
               </select>
             </div>
             <div className="col-md-3 mb-3">
-              <label htmlFor="filtroCantidadDormitorios" className="form-label">Cantidad de Dormitorios:</label>
+              <label htmlFor="filtroCantidadDormitorios" className="form-label">Dormitorios:</label>
               <select
                 className="form-select"
                 id="filtroCantidadDormitorios"
@@ -177,8 +177,8 @@ const BuscarAlojamientos = () => {
                     <p className="card-text"><strong>Precio por día:</strong> {alojamiento.PrecioPorDia}</p>
                     <p className="card-text"><strong>Latitud:</strong> {alojamiento.Latitud}</p>
                     <p className="card-text"><strong>Longitud:</strong> {alojamiento.Longitud}</p>
-                    <p className="card-text"><strong>Cantidad de Dormitorios:</strong> {alojamiento.CantidadDormitorios}</p>
-                    <p className="card-text"><strong>Cantidad de Baños:</strong> {alojamiento.CantidadBanios}</p>
+                    <p className="card-text"><strong>Dormitorios:</strong> {alojamiento.CantidadDormitorios}</p>
+                    <p className="card-text"><strong>Baños:</strong> {alojamiento.CantidadBanios}</p>
                     <p className="card-text"><strong>Estado:</strong> {alojamiento.Estado}</p>
                   </div>
                 </div>
