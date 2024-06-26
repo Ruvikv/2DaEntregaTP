@@ -58,32 +58,38 @@ const Administracion = () => {
   }, []);
 
 
-    return ( 
-
-        <div>
-            <div className='p-4 d-flex justify-content-center gap-5'>
-                <Link to='/Alojamiento'><button className="shadow__btn">Alojamiento</button></Link>
-                <Link to='/AltaImagenes'><button className="shadow__btn3">Alta Imagenes</button></Link>                     
-                <Link to='/TipoAlojamiento'><button className="shadow__btn2">Tipo Alojamiento y Servicios</button></Link>
-            </div>
-            <div className='container'>
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Alojamiento</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Latitud</th>
-                    <th scope="col">Longitud</th>
-                    <th scope="col">Precio Por Dia</th>
-                    <th scope="col">Cantidad de Dormitorios</th>
-                    <th scope="col">Cantidad de Baños</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Tipo de Alojamiento</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {alojamientosFiltrados.length > 0 ? (
-                    alojamientosFiltrados.map((alojamiento, index) => (
+  return ( 
+    <div>
+      <div className="p-4 d-flex flex-column flex-md-row justify-content-center gap-3 gap-md-5">
+        <Link to='/Alojamiento'>
+          <button className="shadow__btn">Alojamiento</button>
+        </Link>
+        <Link to='/AltaImagenes'>
+          <button className="shadow__btn3">Alta Imagenes</button>
+        </Link>                     
+        <Link to='/TipoAlojamiento'>
+          <button className="shadow__btn2">Tipo Alojamiento y Servicios</button>
+        </Link>
+      </div>
+      <div className="container">
+        <div className="table-responsive">
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Alojamiento</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Latitud</th>
+                <th scope="col">Longitud</th>
+                <th scope="col">Precio Por Dia</th>
+                <th scope="col">Cantidad de Dormitorios</th>
+                <th scope="col">Cantidad de Baños</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Tipo de Alojamiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              {alojamientosFiltrados.length > 0 ? (
+                alojamientosFiltrados.map((alojamiento, index) => (
                   <tr key={index}>
                     <th>{alojamiento.Titulo}</th>
                     <td>{alojamiento.Descripcion}</td>
@@ -95,14 +101,18 @@ const Administracion = () => {
                     <td>{alojamiento.Estado}</td>
                     <td>{tiposAlojamiento[alojamiento.TipoAlojamiento]}</td>
                   </tr>
-                  ))):(
-                    <p>No hay alojamientos disponibles.</p>
-                    )}                
-                </tbody>
-              </table>
-            </div>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="9" className="text-center">No hay alojamientos disponibles.</td>
+                </tr>
+              )}                
+            </tbody>
+          </table>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Administracion;

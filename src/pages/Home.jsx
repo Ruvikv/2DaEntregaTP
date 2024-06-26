@@ -6,30 +6,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Home = () => {
 
-  const [alojamientos, setAlojamientos] = useState('');
+
   const [allImagenes, setAllImagenes] = useState([]);
   const [titulo, setTitulo] = useState({});
   const [descripcion, setDescripcion] = useState({}); 
   const [estado, setEstado] = useState({});
-
-
-  // Devuelve todos los alojamientos
-  useEffect(() => {
-    const fetchAlojamientos = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/alojamiento/getAlojamientos/");
-        if (response.ok){
-          const data = await response.json();
-          setAlojamientos(data);
-        } else {
-          console.error('Error en obtener Alojamientos');
-        }
-      } catch (error){
-        console.error('Error al conectarse con la API:', error);
-      }
-    };
-    fetchAlojamientos();
-    }, []);      
 
 
 

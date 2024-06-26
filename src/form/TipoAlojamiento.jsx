@@ -147,7 +147,7 @@ const TipoAlojamiento = () => {
 
   return (
     <div>
-      <div className='d-flex justify-content-center gap-3'>
+      <div className='d-flex flex-column flex-md-row justify-content-center gap-3'>
         <div>
           <AltaAlojamiento />
         </div>
@@ -157,8 +157,8 @@ const TipoAlojamiento = () => {
       </div>
       <div className='container pt-4'>
         <div className='row'>
-          <div className='col'>
-            <select onChange={(e) => setAlojamientoElegido(e.target.value)} className="form-select form-select-lg mb-3" aria-label="Large select example">
+          <div className='col-12 col-md-6 mb-3'>
+            <select onChange={(e) => setAlojamientoElegido(e.target.value)} className="form-select form-select-lg" aria-label="Large select example">
               <option selected>Seleccione un Alojamiento</option>
               {alojamientosFiltrados.length > 0 ? (
                 alojamientosFiltrados.map((alojamiento) => (
@@ -167,12 +167,12 @@ const TipoAlojamiento = () => {
                   </option>
                 ))
               ) : (
-                <p>No hay alojamientos disponibles.</p>
+                <option>No hay alojamientos disponibles.</option>
               )}
             </select>
           </div>
-          <div className='col'>
-            <select onChange={(e) => setAlojamientoServicio(e.target.value)} className="form-select form-select-lg mb-3" aria-label="Small select example">
+          <div className='col-12 col-md-6 mb-3'>
+            <select onChange={(e) => setAlojamientoServicio(e.target.value)} className="form-select form-select-lg" aria-label="Small select example">
               <option selected>Seleccionar Servicio</option>
               {allServicios.map((servicio) => (
                 <option key={servicio.idServicio} value={servicio.idServicio}>
@@ -181,8 +181,8 @@ const TipoAlojamiento = () => {
               ))}
             </select>
           </div>
-          <div className='col'>
-            <button onClick={sendHandler} type="button" className="btn btn-success col-7">Enviar</button>
+          <div className='col-12 text-center'>
+            <button onClick={sendHandler} type="button" className="btn btn-success col-7 col-md-4">Enviar</button>
           </div>
         </div>
       </div>

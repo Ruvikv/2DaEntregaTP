@@ -124,90 +124,94 @@ const AltaImagenes = () =>{
 
 
 
-  return (
+    return (
       <div>
         <div className='container'>
           <div className='p-4'>
             <div className='row'>
-              <div className="d-flex justify-content-center gap-3">
-                <div className='row col-6'>
+              <div className="d-flex flex-column flex-md-row justify-content-center gap-3">
+                <div className='col-12 col-md-6'>
                   <select
                     id='alojamiento'
                     onChange={(e) => setAlojamientoElegido(e.target.value)}
-                    className="form-select" aria-label="Default select example">
-                      <option selected>Seleccione una Alojamiento</option>
-                      {alojamientos.length > 0 ? (
+                    className="form-select"
+                    aria-label="Default select example">
+                    <option selected>Seleccione una Alojamiento</option>
+                    {alojamientos.length > 0 ? (
                       alojamientos.map((tipo) =>
-                      <option key={tipo.idAlojamiento} value={tipo.idAlojamiento}>
-                        {tipo.Titulo}
-                      </option>
-                      )) : (<p>No hay alojamientos disponibles.</p>
-                        )}
+                        <option key={tipo.idAlojamiento} value={tipo.idAlojamiento}>
+                          {tipo.Titulo}
+                        </option>
+                      )) : (<option>No hay alojamientos disponibles.</option>
+                    )}
                   </select>
                 </div>
-                <div className='col-4'>
+                <div className='col-12 col-md-4'>
                   <input
-                  onChange={(e) => setFile(e.target.value)}               
-                  className="form-control" 
-                  type="file" 
-                  id="fileImput"/>                  
+                    onChange={(e) => setFile(e.target.value)}
+                    className="form-control"
+                    type="file"
+                    id="fileInput"
+                  />
                 </div>
-                <div className='col-2'>
+                <div className='col-12 col-md-2'>
                   <button
-                  onClick={sendHandler}
-                  type="button" 
-                  className="btn btn-success col-12">Cargar</button>                    
+                    onClick={sendHandler}
+                    type="button"
+                    className="btn btn-success col-12">Cargar</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
+  
         {/* IMAGEN */}
-        <div className='container d-flex gap-3'>
-        {allImagenes.length > 0 ? (
-        allImagenes.map((alojamiento) => (
-        <div className='' key={alojamiento.idAlojamiento}>
-          <div className="card" style={{ width: '20rem' }}>
-            <img src={`/images/${alojamiento.idAlojamiento}.jpg`} className="card-img-top" alt="Imagen del alojamiento" style={{ height: '35vh' }} onError={(e) => { e.target.onerror = null; e.target.src = '/images/default.jpg'; }}/>
-            <div className="card-body">
-              <p className="card-text">{titulo[alojamiento.idAlojamiento]}</p>
-            </div>
-          </div>
+        <div className='container d-flex flex-wrap gap-3'>
+          {allImagenes.length > 0 ? (
+            allImagenes.map((alojamiento) => (
+              <div className='col-12 col-md-4' key={alojamiento.idAlojamiento}>
+                <div className="card" style={{ width: '100%' }}>
+                  <img src={`/images/${alojamiento.idAlojamiento}.jpg`} className="card-img-top" alt="Imagen del alojamiento" style={{ height: '35vh' }} onError={(e) => { e.target.onerror = null; e.target.src = '/images/default.jpg'; }} />
+                  <div className="card-body">
+                    <p className="card-text">{titulo[alojamiento.idAlojamiento]}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (<p>No hay alojamientos disponibles.</p>
+          )}
         </div>
-        ))
-        ) : (<p>No hay alojamientos disponibles.</p>
-        )}
-        </div>
-
+  
         <div className='container p-3'>
-          <table className="table table-bordered border-primary">
-            <thead>
-              <tr>
-                <th scope="col">Titulo</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {alojamientos.length > 0 ? (
-                alojamientos.map((alojamiento) => (
-              <tr key={alojamiento.id}>
-                <td>{alojamiento.Titulo}</td>
-                <td>{alojamiento.Descripcion}</td>
-                <td>{alojamiento.Estado}</td>
-              </tr>
-              ))
-              ) : (<p>No hay alojamientos disponibles.</p>
-              )}
-            </tbody>
-          </table>
+          <div className="table-responsive">
+            <table className="table table-bordered border-primary">
+              <thead>
+                <tr>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {alojamientos.length > 0 ? (
+                  alojamientos.map((alojamiento) => (
+                    <tr key={alojamiento.id}>
+                      <td>{alojamiento.Titulo}</td>
+                      <td>{alojamiento.Descripcion}</td>
+                      <td>{alojamiento.Estado}</td>
+                    </tr>
+                  ))
+                ) : (<tr><td colSpan="3">No hay alojamientos disponibles.</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>        
-    </div>
-  )
+      </div>
+    )
   }
-
-export default AltaImagenes
+  
+  export default AltaImagenes;
 
 
 
