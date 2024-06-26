@@ -1,6 +1,6 @@
 IDW Alojamientos
 Descripción
-IDW Alojamientos es un proyecto educativo desarrollado en React, Node.js y una base de datos SQL que muestra alojamientos con sus respectivos servicios, precios, cantidad de baños, ubicación, y más detalles. El propósito principal es permitir a los usuarios buscar alojamientos que cumplan con sus requisitos específicos.
+IDW Alojamientos es un proyecto educativo desarrollado en React completamente responsive, Node.js y una base de datos SQL que muestra alojamientos con sus respectivos servicios, precios, cantidad de baños, ubicación, y más detalles. El propósito principal es permitir a los usuarios buscar alojamientos que cumplan con sus requisitos específicos.
 
 Instalación
 Para ejecutar el proyecto localmente, sigue estos pasos:
