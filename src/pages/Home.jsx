@@ -1,12 +1,155 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Buscador from '../form/Buscador';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 const Home = () => {
-  return (
 
+  const [alojamientos, setAlojamientos] = useState('');
+  const [allImagenes, setAllImagenes] = useState([]);
+  const [titulo, setTitulo] = useState({});
+  const [descripcion, setDescripcion] = useState({}); 
+  const [estado, setEstado] = useState({});
+
+
+  // Devuelve todos los alojamientos
+  useEffect(() => {
+    const fetchAlojamientos = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/alojamiento/getAlojamientos/");
+        if (response.ok){
+          const data = await response.json();
+          setAlojamientos(data);
+        } else {
+          console.error('Error en obtener Alojamientos');
+        }
+      } catch (error){
+        console.error('Error al conectarse con la API:', error);
+      }
+    };
+    fetchAlojamientos();
+    }, []);      
+
+
+
+  // me devuelve todas las imagenes
+  useEffect(() => {
+    const fetchAllImagenes = async () => {
+      try {
+        const res = await fetch('http://localhost:3001/imagen/getAllImagenes');
+        if (res.ok) {
+          const data = await res.json();
+          setAllImagenes(data);
+          console.log(data);
+        } else {
+          console.error('Error en obtener imágenes');
+        }
+      } catch (error) {
+        console.error('Error al conectarse con la API:', error);
+      }
+    };
+    fetchAllImagenes();
+  }, []);
+
+  //Filtrado por id de Tabla Imagenes a Alojamientos Titulos
+  useEffect(() => {
+    const fetchTitulo = async () => {
+      const titulos = {};
+      for (const imagen of allImagenes) {
+        const descripcion = await filterTitulos(imagen.idAlojamiento);
+        titulos[imagen.idAlojamiento] = descripcion;
+      }
+      setTitulo(titulos);
+    };
+
+    fetchTitulo();
+  }, [allImagenes]);
+
+
+  const filterTitulos = async (idAlojamiento) => {
+    try {
+      const response = await fetch(`http://localhost:3001/alojamiento/getAlojamiento/${idAlojamiento}`, {
+        method: 'GET',
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data.Titulo
+      }
+    } catch (error) {
+      console.error('Error fetching alojamiento:', error);
+    }
+    return null;
+  };
+
+
+    //Filtrado por id de Tabla Imagenes a Alojamientos Descripcion
+    useEffect(() => {
+      const fetchDescripcion = async () => {
+        const titulos = {};
+        for (const imagen of allImagenes) {
+          const descripcion = await filterDescripcion(imagen.idAlojamiento);
+          titulos[imagen.idAlojamiento] = descripcion;
+        }
+        setDescripcion(titulos);
+      };
+  
+      fetchDescripcion();
+    }, [allImagenes]);
+  
+  
+    const filterDescripcion = async (idAlojamiento) => {
+      try {
+        const response = await fetch(`http://localhost:3001/alojamiento/getAlojamiento/${idAlojamiento}`, {
+          method: 'GET',
+        });
+        if (response.ok) {
+          const data = await response.json();
+          return data.Descripcion
+        }
+      } catch (error) {
+        console.error('Error fetching alojamiento:', error);
+      }
+      return null;
+    };
+
+
+        //Filtrado por id de Tabla Imagenes a Alojamientos Estado
+        useEffect(() => {
+          const fetchEstado = async () => {
+            const titulos = {};
+            for (const imagen of allImagenes) {
+              const descripcion = await filterEstado(imagen.idAlojamiento);
+              titulos[imagen.idAlojamiento] = descripcion;
+            }
+            setEstado(titulos);
+          };
+      
+          fetchEstado();
+        }, [allImagenes]);
+      
+      
+        const filterEstado = async (idAlojamiento) => {
+          try {
+            const response = await fetch(`http://localhost:3001/alojamiento/getAlojamiento/${idAlojamiento}`, {
+              method: 'GET',
+            });
+            if (response.ok) {
+              const data = await response.json();
+              return data.Estado
+            }
+          } catch (error) {
+            console.error('Error fetching alojamiento:', error);
+          }
+          return null;
+        };
+    
+
+
+
+
+
+  return (
 <div>
 
 {/* Carrusel imagenes */}
@@ -150,19 +293,36 @@ const Home = () => {
 
 {/*       <!-- TARJETAS --> */}
 
-      <section className="container">
-        <div className="card-group pt-2">
-          <div className="card">
-            <img src={require('../images/card1.jpg')} className="card-img-top" alt="..."/>
-            <div className="card-body">
-              <h5 className="card-title">VIETNAM, 9 días</h5>
-              <p className="card-text">Vietnam desde Barcelona.</p>
+    <section className="container">
+      <div className="row">
+        {allImagenes.length > 0 ? (
+          allImagenes.map((alojamiento) => (
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch" key={alojamiento.idAlojamiento}>
+              <div className="card mb-4">
+                <img 
+                  src={`/images/${alojamiento.idAlojamiento}.jpg`} 
+                  className="card-img-top" 
+                  alt="Imagen del alojamiento" 
+                  style={{ height: '35vh', objectFit: 'cover' }} 
+                  onError={(e) => { 
+                    e.target.onerror = null; 
+                    e.target.src = '/images/default.jpg'; 
+                  }} 
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{titulo[alojamiento.idAlojamiento]}</h5>
+                  <p className="card-text">{descripcion[alojamiento.idAlojamiento]}</p>
+                </div>
+                <div className="card-footer cardFooterColor">
+                  <small className="text-body-primary">{estado[alojamiento.idAlojamiento]}</small>
+                </div>
+              </div>
             </div>
-            <div className="card-footer cardFooterColor">
-              <small className="text-body-primary">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
+          ))
+        ) : (
+          <p>No hay alojamientos disponibles.</p>
+        )}
+      </div>
     </section>
 
 {/*       <!-- PREGUNTAS FRECUENTES  -->  */}

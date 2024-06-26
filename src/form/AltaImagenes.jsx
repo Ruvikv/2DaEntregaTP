@@ -10,12 +10,7 @@ const AltaImagenes = () =>{
 
 
     const [alojamientoElegido, setAlojamientoElegido] = useState('');
-
-
-    //----------------------------------------------------------------
-
-
-
+    const [titulo, setTitulo] = useState({});
 
     //----------------------------------------------------------------
 
@@ -25,6 +20,7 @@ const AltaImagenes = () =>{
 
       // Envia el formulario
       const sendHandler = async (e) => {
+        e.preventDefault();
         
         const data = {
           idAlojamiento: alojamientoElegido,
@@ -95,75 +91,37 @@ const AltaImagenes = () =>{
       fetchAllImagenes();
     }, []);
 
+    //Filtrado por id de Tabla Imagenes a Alojamientos
+    useEffect(() => {
+      const fetchTitulo = async () => {
+        const titulos = {};
+        for (const imagen of allImagenes) {
+          const descripcion = await filterTitulos(imagen.idAlojamiento);
+          titulos[imagen.idAlojamiento] = descripcion;
+        }
+        setTitulo(titulos);
+      };
+
+      fetchTitulo();
+    }, [allImagenes]);
 
 
-
-/*         const data = await res.json();
-          if (Array.isArray(data)) {
-            setImagenesTotales(data);
-          } else {
-            console.error('ERROR: Array esperada pero no obtenida', data);
-            }
-          } catch (error) {
-            console.error('Error recuperación de datos:', error);
-          }
-        };
-          fetchAllImagenes();
-        }, []);  */
-        
-
-/*         const getAllImagenes = async (id) => {
-          try {
-            const response = await fetch(`http://localhost:3001/imagen/getAllImagenes?idAlojamiento=${id}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            });
-        
-            if (response.ok) {
-              const data = await response.json();
-              setImages(data);
-            } else {
-              console.error('Error en obtener Imagenes');
-            }
-          } catch (error) {
-            console.error('Error al conectarse con la API:', error);
-          }
-        };
-
-        useEffect(() => {
-          getAllImagenes(alojamiento);
-        }) */
-        
-
-/*     const filterImage = async (idImagen) => {
-      try{
-        const response = await fetch(`http://localhost:3001/imagen/getImagen/${idImagen}`, {
+    const filterTitulos = async (idAlojamiento) => {
+      try {
+        const response = await fetch(`http://localhost:3001/alojamiento/getAlojamiento/${idAlojamiento}`, {
           method: 'GET',
         });
         if (response.ok) {
           const data = await response.json();
-          return data.RutaArchivo
+          return data.Titulo;
         }
       } catch (error) {
-        console.error('Error fetching image:', error);
+        console.error('Error fetching alojamiento:', error);
       }
       return null;
     };
 
-    useEffect(() => {
-      const fetchAllImagenes = async () => {
-        const tipos = {};
-        for (const imagen of imagenesTotales) {
-          const rutaImagen = await filterImage(imagen.idImagen);
-          tipos[imagen.idImagen] = rutaImagen;
-        }
-        setImages(tipos);
-      };
-    
-      fetchAllImagenes();
-    }, [imagenesTotales]); */
+
 
 
   return (
@@ -204,14 +162,24 @@ const AltaImagenes = () =>{
             </div>
           </div>
         </div>
+
+        {/* IMAGEN */}
         <div className='container d-flex gap-3'>
-          <div  className="card" style={{ width: '18rem' }}>
-            <img  className="card-img-top" alt="Imagen del alojamiento" />
+        {allImagenes.length > 0 ? (
+        allImagenes.map((alojamiento) => (
+        <div className='' key={alojamiento.idAlojamiento}>
+          <div className="card" style={{ width: '20rem' }}>
+            <img src={`/images/${alojamiento.idAlojamiento}.jpg`} className="card-img-top" alt="Imagen del alojamiento" style={{ height: '35vh' }} onError={(e) => { e.target.onerror = null; e.target.src = '/images/default.jpg'; }}/>
             <div className="card-body">
-              <p className="card-text"></p>
+              <p className="card-text">{titulo[alojamiento.idAlojamiento]}</p>
             </div>
           </div>
-      </div>
+        </div>
+        ))
+        ) : (<p>No hay alojamientos disponibles.</p>
+        )}
+        </div>
+
         <div className='container p-3'>
           <table className="table table-bordered border-primary">
             <thead>
