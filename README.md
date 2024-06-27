@@ -21,7 +21,7 @@ Envía un pull request describiendo los cambios propuestos.
 Licencia
 Este proyecto está bajo una licencia educativa.
 
-Acontunuación dejamos el link del video explicativo de como funciona la web https://drive.google.com/file/d/1R0ys7q8pPRnWTYoYIJYZZnm58p3Mx_GV/view?usp=drive_link
+A continuación dejamos el link del video explicativo de como funciona la web https://drive.google.com/file/d/1R0ys7q8pPRnWTYoYIJYZZnm58p3Mx_GV/view?usp=drive_link
 
 Créditos
 Desarrollado por Matías López y Thiago Chamorro como proyecto.-
